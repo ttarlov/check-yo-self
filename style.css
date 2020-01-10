@@ -32,7 +32,7 @@ h1 {
   font-weight: 800;
 }
 
-span {
+.yo {
   color: #FFC30C;
 }
 
@@ -85,7 +85,7 @@ main {
 
 .title-input,
 .task-input {
-  width: 437px;
+  width: 400px;
   height: 46px;
   border-radius: 4px;
   border: solid 2px #1F1F3D;
@@ -118,7 +118,7 @@ main {
   margin-bottom: 10px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  width: 416px;
+  width: 380px;
 }
 
 .task-and-buttons {
@@ -133,7 +133,7 @@ main {
 button,
 .filter-btn-section button {
   height: 46px;
-  width: 437px;;
+  width: 400px;
   margin-top: 25px;
   color: #FFFFFF;
   background-color: #1F1F3D;
@@ -149,7 +149,7 @@ button,
 
 
 .filter-btn-section button {
-  width: 437px;
+  width: 400px;
 }
 
 
@@ -168,8 +168,35 @@ button,
 }
 
 .task-card {
-  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 408px;
   height: 600px;
-  border: 1px solid red;
+  border: solid #D0DADF 2px;
   margin: 30px 30px 30px 30px;
+}
+
+.saved-tasks-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 5px;
+  border-top: solid #D0DADF 2px;
+  border-bottom: solid #D0DADF 2px;
+  height: 400px;
+  padding: 15px;
+}
+
+
+.checkbox-img {
+  height: 20px;
+}
+
+.single-task {
+  font-size: 1.4em;
+}
+
+h2 {
+  padding: 10px;
 }
