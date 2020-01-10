@@ -99,8 +99,26 @@ main {
   margin-top: 10px;
 }
 
+.add-task-btn-input {
+  display: flex;
+}
+
+.add-task-btn {
+  width: 12%;
+  margin: 0;
+  padding: 0;
+  background-color: #1F1F3D;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font-size: 2em;
+  font-weight: 100;
+}
+
 .task-input {
   margin-bottom: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  width: 315px;
 }
 
 .task-and-buttons {
