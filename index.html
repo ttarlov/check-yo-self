@@ -8,22 +8,25 @@
   </head>
   <body>
     <nav>
-      <p>CHECK <span>YO'</span> SELF</p>
+      <h1>CHECK <span>YO'</span> SELF</h1>
+      <div class="search-btn-input">
+      <input class="search-btn" type="image" src="assets/search.svg" alt="Search" name="button"></input>
       <input type="text" value="Search">
+      </div>
     </nav>
     <main>
       <section class="left-side">
         <section class="task-and-buttons">
           <div class="task-title-input">
             <p>Task Title<p>
-              <input type="text" name="task-title">
+              <input class="title-input" type="text" name="task-title">
           </div>
           <div class="task-item-input">
             <p>Task Item<p>
-              <input type="text" name="task-item">
+              <input class="task-input" type="text" name="task-item">
           </div>
           <button type="button" name="make-task-list">Make Task List</button>
-          <button type="button" name="clear-all">Clear All</button>
+          <button class="clear-btn" type="button" name="clear-all">Clear All</button>
         </section>
         <section class="filter-btn-section">
           <button type="button" name="filter">Filter by Urgency</button>
