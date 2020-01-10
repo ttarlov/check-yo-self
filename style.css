@@ -13,7 +13,7 @@ input {
 }
 
 body {
-  height: 900px;
+  max-height: 900px;
 }
 
 nav {
@@ -68,7 +68,7 @@ nav input {
 
 main {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 2fr 5fr;
   grid-template-areas:
   "leftside rightside"
 }
@@ -85,7 +85,7 @@ main {
 
 .title-input,
 .task-input {
-  width: 336px;
+  width: 437px;
   height: 46px;
   border-radius: 4px;
   border: solid 2px #1F1F3D;
@@ -118,14 +118,14 @@ main {
   margin-bottom: 10px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  width: 315px;
+  width: 416px;
 }
 
 .task-and-buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 418px;
+  width: 440px;
   border-bottom: solid 2px #436A7B;
 }
 
@@ -133,7 +133,7 @@ main {
 button,
 .filter-btn-section button {
   height: 46px;
-  width: 336px;;
+  width: 437px;;
   margin-top: 25px;
   color: #FFFFFF;
   background-color: #1F1F3D;
@@ -149,11 +149,27 @@ button,
 
 
 .filter-btn-section button {
-  width: 336px;
+  width: 437px;
 }
 
 
 .right-side {
+  display: flex;
   grid-area: rightside;
-  /* border: 1px solid red; */
+  border: 1px solid red;
+  height: 900px;
+}
+
+.task-card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: scroll;
+}
+
+.task-card {
+  width: 500px;
+  height: 600px;
+  border: 1px solid red;
+  margin: 30px 30px 30px 30px;
 }
