@@ -18,6 +18,9 @@ function globalButtonEventHandler(event) {
     console.log('filter button pressed');
   } else if (event.target.classList.contains('make-task-btn-js')) {
     console.log('make task button pressed', event.target);
+  } else if (event.target.classList.contains('delete-img')) {
+    deleteUnsavedTask(event);
+    // console.log(event.target.classList);
   }
 }
 
@@ -26,7 +29,7 @@ function displayUnsavedTaskes() {
   var task = new Task(taskItemInput.value);
   unsavedTasks.insertAdjacentHTML('afterbegin',
   `<div class="saved-task-img">
-    <img class="checkbox-img" src="assets/delete.svg" alt="checkbox"></img>
+    <img class="delete-img" data-id="${task.id}" src="assets/delete.svg" alt="checkbox"></img>
     <span class="single-task">${task.content}</span>
   </div>`);
   potentialToDo.addTask(task);
@@ -44,4 +47,14 @@ function clearInput() {
   } else if (event.target.classList.contains('task-input')) {
     taskItemInput.value = '';
   }
+}
+
+function deleteUnsavedTask(event) {
+  let taskToRemove = event.target.dataset.id;
+  potentialToDo.removeTask(taskToRemove);
+  event.target.closest('.saved-task-img').remove();
+}
+
+function incertTaskCard() {
+  
 }
