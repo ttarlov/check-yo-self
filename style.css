@@ -99,6 +99,12 @@ main {
   margin-top: 10px;
 }
 
+.unsaved-tasks {
+  width: 400px;
+  height: auto;
+  border: 1px solid red;
+}
+
 .add-task-btn-input {
   display: flex;
 }
