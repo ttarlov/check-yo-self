@@ -1,72 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css" />
-    <title>Check Yo Self</title>
-  </head>
-  <body>
-    <nav>
-      <h1>CHECK <span class="yo">YO'</span> SELF</h1>
-      <div class="search-btn-input">
+  <title>Check Yo Self</title>
+</head>
+
+<body>
+  <nav>
+    <h1>CHECK <span class="yo">YO'</span> SELF</h1>
+    <div class="search-btn-input">
       <input class="search-btn" type="image" src="assets/search.svg" alt="Search" name="button"></input>
       <input type="text" value="Search">
-      </div>
-    </nav>
-    <main>
-      <section class="left-side">
-        <section class="task-and-buttons">
-          <div class="task-title-input">
-            <p>Task Title<p>
+    </div>
+  </nav>
+  <main>
+    <section class="left-side">
+      <section class="task-and-buttons">
+        <div class="task-title-input">
+          <p>Task Title<p>
               <input class="title-input" type="text" name="task-title">
-          </div>
-          <div class="task-item-input">
-            <p>Task Item<p>
-              <div class= "add-task-btn-input">
+        </div>
+        <div class="task-item-input">
+          <p>Task Item<p>
+              <div class="add-task-btn-input">
                 <input class="task-input" type="text" name="task-item">
                 <button class="add-task-btn" type="submit" alt="Submit" name="button">+</button>
               </div>
-          </div>
-          <button type="button" name="make-task-list">Make Task List</button>
-          <button class="clear-btn" type="button" name="clear-all">Clear All</button>
-        </section>
-        <section class="filter-btn-section">
-          <button type="button" name="filter">Filter by Urgency</button>
-        </section>
-      </section> <!-- closing of left side section  -->
-      <section class="right-side">
-        <div class="task-card-container">
-          <div class="task-card">
-            <h2> Task Title</h2>
-            <div class="saved-tasks-container">
-              <div class="saved-tasks">
-                <div class= "saved-task-img">
-                  <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
-                  <span class="single-task">Don't ever play yourself.</span>
-                </div>
-                <div class= "saved-task-img">
-                  <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
-                  <span class="single-task">Don't ever play yourself.</span>
-                </div>
-                <div class= "saved-task-img">
-                  <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
-                  <span class="single-task">Don't ever play yourself.</span>
-                </div>
+        </div>
+        <button type="button" name="make-task-list">Make Task List</button>
+        <button class="clear-btn" type="button" name="clear-all">Clear All</button>
+      </section>
+      <section class="filter-btn-section">
+        <button type="button" name="filter">Filter by Urgency</button>
+      </section>
+    </section> <!-- closing of left side section  -->
+    <section class="right-side">
+      <div class="task-card-container">
+        <div class="task-card">
+          <h2> Task Title</h2>
+          <div class="saved-tasks-container">
+            <div class="saved-tasks">
+              <div class="saved-task-img">
+                <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
+                <span class="single-task">Don't ever play yourself.</span>
+              </div>
+              <div class="saved-task-img">
+                <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
+                <span class="single-task">Don't ever play yourself.</span>
+              </div>
+              <div class="saved-task-img">
+                <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
+                <span class="single-task">Don't ever play yourself.</span>
               </div>
             </div>
           </div>
-          <div class="task-card">
-          </div>
-          <div class="task-card">
-          </div>
-          <div class="task-card">
+          <div class="urgency-delete-container">
+            <div>
+              <img src="assets/urgent.svg" alt="urgency level">
+              <p>urgent</p>
+            </div>
+            <div>
+              <img src="assets/delete.svg" alt="delete card button">
+              <p>delete</p>
+            </div>
           </div>
         </div>
-      </section> <!-- closing of right side section  -->
-    </main>
-    <script src="main.js"></script>
+        <div class="task-card">
+        </div>
+        <div class="task-card">
+        </div>
+        <div class="task-card">
+        </div>
+      </div>
+    </section> <!-- closing of right side section  -->
+  </main>
+  <script src="main.js"></script>
   <script src="task.js"></script>
   <script src="todo-list.js"></script>
-  </body>
+</body>
+
 </html>
