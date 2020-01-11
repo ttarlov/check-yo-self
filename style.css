@@ -89,6 +89,8 @@ main {
   height: 46px;
   border-radius: 4px;
   border: solid 2px #1F1F3D;
+  font-size: 1.2em;
+  padding: 15px;
 }
 
 .task-title-input p,
@@ -102,7 +104,7 @@ main {
 .unsaved-tasks {
   width: 400px;
   height: auto;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .add-task-btn-input {
@@ -162,7 +164,7 @@ button,
 .right-side {
   display: flex;
   grid-area: rightside;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 900px;
 }
 
@@ -212,15 +214,24 @@ h2 {
 .urgency-delete-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  align-content: flex-end;
   padding: 20px;
+  margin-top: 26px;
 }
 
 .urgency-delete-container img {
-  width: 50px;
+  width: 38px;
 }
 
 .urgency-delete-container p {
-  font-size: 1.5em;
+  font-size: .9em;
   text-transform: uppercase;
+}
+
+.urgent-img-tag,
+.delete-img-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
