@@ -5,8 +5,8 @@ var unsavedTasks = document.querySelector('.unsaved-tasks');
 var potentialToDo = new ToDoList();
 
 globalButtonEventListener.addEventListener('click', globalButtonEventHandler);
-
-
+taskItemInput.addEventListener('click', clearInput);
+taskTitleInput.addEventListener('click', clearInput);
 
 function globalButtonEventHandler(event) {
   if (event.target.classList.contains('add-task-btn-js')) {
@@ -24,15 +24,24 @@ function globalButtonEventHandler(event) {
 function displayUnsavedTaskes() {
   // debugger
   var task = new Task(taskItemInput.value);
-  unsavedTasks.insertAdjacentHTML('beforeend',
+  unsavedTasks.insertAdjacentHTML('afterbegin',
   `<div class="saved-task-img">
     <img class="checkbox-img" src="assets/delete.svg" alt="checkbox"></img>
     <span class="single-task">${task.content}</span>
   </div>`);
   potentialToDo.addTask(task);
   console.log(potentialToDo.tasks);
+  taskItemInput.value = 'Add Another Task Name';
 }
 
 function generateId() {
   return Date.now();
+}
+
+function clearInput() {
+  if (event.target.classList.contains('title-input')) {
+    taskTitleInput.value = '';
+  } else if (event.target.classList.contains('task-input')) {
+    taskItemInput.value = '';
+  }
 }
