@@ -199,4 +199,22 @@ button,
 
 h2 {
   padding: 10px;
+  color: #20203D;
+  margin-left: 10px;
+}
+
+.urgency-delete-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.urgency-delete-container img {
+  width: 50px;
+}
+
+.urgency-delete-container p {
+  font-size: 1.5em;
+  text-transform: uppercase;
 }
