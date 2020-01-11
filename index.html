@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,400,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css" />
   <title>Check Yo Self</title>
 </head>
@@ -21,22 +21,22 @@
       <section class="task-and-buttons">
         <div class="task-title-input">
           <p>Task Title<p>
-              <input class="title-input" type="text" name="task-title">
+              <input class="title-input title-input-js" type="text" name="task-title">
         </div>
         <section class="unsaved-tasks">
         </section>
         <div class="task-item-input">
           <p>Task Item<p>
               <div class="add-task-btn-input">
-                <input class="task-input" type="text" name="task-item">
-                <button class="add-task-btn" type="submit" alt="Submit" name="button">+</button>
+                <input class="task-input task-input-js" type="text" name="task-item">
+                <button class="add-task-btn add-task-btn-js" type="submit" alt="Submit" name="button">+</button>
               </div>
         </div>
-        <button type="button" name="make-task-list">Make Task List</button>
-        <button class="clear-btn" type="button" name="clear-all">Clear All</button>
+        <button class="make-task-btn-js" type="button" name="make-task-list">Make Task List</button>
+        <button class="clear-btn clear-btn-js " type="button" name="clear-all">Clear All</button>
       </section>
       <section class="filter-btn-section">
-        <button type="button" name="filter">Filter by Urgency</button>
+        <button class="filter-btn-js" type="button" name="filter">Filter by Urgency</button>
       </section>
     </section> <!-- closing of left side section  -->
     <section class="right-side">
@@ -79,9 +79,9 @@
       </div>
     </section> <!-- closing of right side section  -->
   </main>
-  <script src="main.js"></script>
   <script src="task.js"></script>
   <script src="todo-list.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>
