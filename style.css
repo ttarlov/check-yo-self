@@ -173,7 +173,19 @@ button,
   justify-content: center;
   flex-wrap: wrap;
   overflow: scroll;
+  position: relative;
 }
+
+.no-new-task-yet {
+  width: auto;
+  height: 500px;
+  position: absolute;
+  top: 250px;
+  right: 236px;
+  font-size: 3em;
+  color: grey;
+}
+
 
 .task-card {
   display: flex;
