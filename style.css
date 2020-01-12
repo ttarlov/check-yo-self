@@ -201,6 +201,10 @@ button,
   height: 20px;
 }
 
+.checkbox-img {
+  height: 20px;
+}
+
 .single-task {
   font-size: 1.4em;
 }
