@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,400,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css" />
   <title>Check Yo Self</title>
 </head>
@@ -13,7 +13,7 @@
     <h1>CHECK <span class="yo">YO'</span> SELF</h1>
     <div class="search-btn-input">
       <input class="search-btn" type="image" src="assets/search.svg" alt="Search" name="button"></input>
-      <input type="text" value="Search">
+      <input type="text" placeholder="Search">
     </div>
   </nav>
   <main>
@@ -21,65 +21,32 @@
       <section class="task-and-buttons">
         <div class="task-title-input">
           <p>Task Title<p>
-              <input class="title-input" type="text" name="task-title">
+              <input class="title-input title-input-js" type="text" name="task-title" placeholder="Input Title">
         </div>
+        <section class="unsaved-tasks">
+        </section>
         <div class="task-item-input">
           <p>Task Item<p>
               <div class="add-task-btn-input">
-                <input class="task-input" type="text" name="task-item">
-                <button class="add-task-btn" type="submit" alt="Submit" name="button">+</button>
+                <input class="task-input task-input-js" type="text" name="task-item" placeholder="Input Task Name">
+                <button disabled class="add-task-btn add-task-btn-js" type="submit" alt="Submit" name="button">+</button>
               </div>
         </div>
-        <button type="button" name="make-task-list">Make Task List</button>
-        <button class="clear-btn" type="button" name="clear-all">Clear All</button>
+        <button disabled class="make-task-btn-js" type="button" name="make-task-list">Make Task List</button>
+        <button class="clear-btn clear-btn-js " type="button" name="clear-all">Clear All</button>
       </section>
       <section class="filter-btn-section">
-        <button type="button" name="filter">Filter by Urgency</button>
+        <button class="filter-btn-js" type="button" name="filter">Filter by Urgency</button>
       </section>
     </section> <!-- closing of left side section  -->
     <section class="right-side">
       <div class="task-card-container">
-        <div class="task-card">
-          <h2> Task Title</h2>
-          <div class="saved-tasks-container">
-            <div class="saved-tasks">
-              <div class="saved-task-img">
-                <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
-                <span class="single-task">Don't ever play yourself.</span>
-              </div>
-              <div class="saved-task-img">
-                <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
-                <span class="single-task">Don't ever play yourself.</span>
-              </div>
-              <div class="saved-task-img">
-                <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
-                <span class="single-task">Don't ever play yourself.</span>
-              </div>
-            </div>
-          </div>
-          <div class="urgency-delete-container">
-            <div>
-              <img src="assets/urgent.svg" alt="urgency level">
-              <p>urgent</p>
-            </div>
-            <div>
-              <img src="assets/delete.svg" alt="delete card button">
-              <p>delete</p>
-            </div>
-          </div>
-        </div>
-        <div class="task-card">
-        </div>
-        <div class="task-card">
-        </div>
-        <div class="task-card">
-        </div>
       </div>
     </section> <!-- closing of right side section  -->
   </main>
-  <script src="main.js"></script>
   <script src="task.js"></script>
   <script src="todo-list.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>
