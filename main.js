@@ -7,6 +7,7 @@ var taskContainer = document.querySelector('.task-card-container');
 var addTaskBtn = document.querySelector('.add-task-btn-js');
 var makeTaskListBtn = document.querySelector('.make-task-btn-js');
 var savedTaskContainer = document.querySelector('.saved-tasks-container');
+var noNewTaskYet = document.querySelector('.no-new-task-yet-js');
 
 globalButtonEventListener.addEventListener('click', globalButtonEventHandler);
 taskItemInput.addEventListener('keyup', checkTaskItemInput);
@@ -63,6 +64,7 @@ function deleteUnsavedTask(event) {
 }
 
 function incertTaskCard() {
+  noNewTaskYet.remove();
   makeTaskListBtn.disabled = true;
   addTaskBtn.disabled = true;
   taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card">
@@ -83,6 +85,7 @@ function incertTaskCard() {
   taskTitleInput.value = '';
   let taskOnToDoCard = document.querySelector('.saved-tasks-container');
   extractTask(taskOnToDoCard);
+  clearUnsavedToDoTasks();
 }
 
 function extractTask(taskOnToDoCard) {
@@ -99,6 +102,7 @@ function extractTask(taskOnToDoCard) {
 }
 
 function clearUnsavedToDoTasks() {
-  potentialToDo.task = [];
-  unsavedTasks.innerHtml = '';
+  potentialToDo.tasks = [];
+  unsavedTasks.innerHTML = '';
+  console.log(potentialToDo.tasks);
 }
