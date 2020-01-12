@@ -6,6 +6,7 @@ var potentialToDo = new ToDoList();
 var taskContainer = document.querySelector('.task-card-container');
 var addTaskBtn = document.querySelector('.add-task-btn-js');
 var makeTaskListBtn = document.querySelector('.make-task-btn-js');
+var savedTaskContainer = document.querySelector('.saved-tasks-container');
 
 globalButtonEventListener.addEventListener('click', globalButtonEventHandler);
 taskItemInput.addEventListener('keyup', checkTaskItemInput);
@@ -45,12 +46,12 @@ function generateId() {
 }
 
 function checkTaskItemInput() {
-  console.log(potentialToDo.tasks.length);
+  // console.log(potentialToDo.tasks.length);
   if (potentialToDo.tasks.length > 0 && taskTitleInput.value.length > 0) {
     console.log(potentialToDo.tasks.length);
     makeTaskListBtn.disabled = false;
   } else if (taskItemInput.value.length > 0) {
-    console.log('Whats inside tasks array', potentialToDo.tasks);
+    // console.log('Whats inside tasks array', potentialToDo.tasks);
     addTaskBtn.disabled = false;
   }
 }
@@ -67,20 +68,6 @@ function incertTaskCard() {
   taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card">
     <h2> ${taskTitleInput.value}</h2>
     <div class="saved-tasks-container">
-      <div class="saved-tasks">
-        <div class="saved-task-img">
-          <img class="delete-img" src="assets/checkbox.svg" alt="checkbox"></img>
-          <span class="single-task">Don't ever play yourself.</span>
-        </div>
-        <div class="saved-task-img">
-          <img class="delete-img" src="assets/checkbox.svg" alt="checkbox"></img>
-          <span class="single-task">Don't ever play yourself.</span>
-        </div>
-        <div class="saved-task-img">
-          <img class="delete-img" src="assets/checkbox.svg" alt="checkbox"></img>
-          <span class="single-task">Don't ever play yourself.</span>
-        </div>
-      </div>
     </div>
     <div class="urgency-delete-container">
       <div class="urgent-img-tag">
@@ -94,4 +81,24 @@ function incertTaskCard() {
     </div>
   </div>`);
   taskTitleInput.value = '';
+  let taskOnToDoCard = document.querySelector('.saved-tasks-container');
+  extractTask(taskOnToDoCard);
+}
+
+function extractTask(taskOnToDoCard) {
+  let taskObj = potentialToDo.tasks;
+  console.log(taskObj[0]);
+  for (var i = 0; i < taskObj.length; i++) {
+    taskOnToDoCard.insertAdjacentHTML('beforeend', `<div class="saved-tasks">
+        <div class="saved-task-img">
+          <img class="checkbox-img" src="assets/checkbox.svg" alt="checkbox"></img>
+          <span class="single-task">${taskObj[i].content}</span>
+        </div>
+      </div>`);
+  }
+}
+
+function clearUnsavedToDoTasks() {
+  potentialToDo.task = [];
+  unsavedTasks.innerHtml = '';
 }
