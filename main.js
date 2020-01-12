@@ -5,11 +5,11 @@ var unsavedTasks = document.querySelector('.unsaved-tasks');
 var potentialToDo = new ToDoList();
 var taskContainer = document.querySelector('.task-card-container');
 var addTaskBtn = document.querySelector('.add-task-btn-js');
+var makeTaskListBtn = document.querySelector('.make-task-btn-js');
 
 globalButtonEventListener.addEventListener('click', globalButtonEventHandler);
-taskItemInput.addEventListener('click', clearInput);
-taskTitleInput.addEventListener('click', clearInput);
-taskItemInput.addEventListener('input', checkInputForContent);
+taskItemInput.addEventListener('keyup', checkTaskItemInput);
+taskTitleInput.addEventListener('keyup', checkTaskItemInput);
 
 function globalButtonEventHandler(event) {
   if (event.target.classList.contains('add-task-btn-js')) {
@@ -24,7 +24,6 @@ function globalButtonEventHandler(event) {
     incertTaskCard();
   } else if (event.target.classList.contains('delete-img')) {
     deleteUnsavedTask(event);
-    // console.log(event.target.classList);
   }
 }
 
@@ -38,23 +37,20 @@ function displayUnsavedTasks() {
   </div>`);
   potentialToDo.addTask(task);
   console.log(potentialToDo.tasks);
-  taskItemInput.value = 'Add Another Task Name';
+  taskItemInput.value = '';
 }
 
 function generateId() {
   return Date.now();
 }
 
-function clearInput() {
-  if (event.target.classList.contains('title-input')) {
-    taskTitleInput.value = '';
-  } else if (event.target.classList.contains('task-input')) {
-    taskItemInput.value = '';
-  }
-}
-
-function checkInputForContent() {
-  if (taskItemInput.value !== '' || 'Add Another Task Name') {
+function checkTaskItemInput() {
+  console.log(potentialToDo.tasks.length);
+  if (potentialToDo.tasks.length > 0 && taskTitleInput.value.length > 0) {
+    console.log(potentialToDo.tasks.length);
+    makeTaskListBtn.disabled = false;
+  } else if (taskItemInput.value.length > 0) {
+    console.log('Whats inside tasks array', potentialToDo.tasks);
     addTaskBtn.disabled = false;
   }
 }
@@ -66,6 +62,8 @@ function deleteUnsavedTask(event) {
 }
 
 function incertTaskCard() {
+  makeTaskListBtn.disabled = true;
+  addTaskBtn.disabled = true;
   taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card">
     <h2> ${taskTitleInput.value}</h2>
     <div class="saved-tasks-container">
@@ -95,4 +93,5 @@ function incertTaskCard() {
       </div>
     </div>
   </div>`);
+  taskTitleInput.value = '';
 }
