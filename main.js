@@ -77,7 +77,7 @@ function incertTaskCard() {
     </div>
     <div class="urgency-delete-container">
       <div class="urgent-img-tag">
-        <img class="urgent-btn" id="urgent-btn-js" src="assets/urgent.svg" alt="urgency level">
+        <img class="urgent-btn not-urgent" id="urgent-btn-js" src="assets/urgent.svg" alt="urgency level">
         <p>urgent</p>
       </div>
       <div class="delete-img-tag">
@@ -118,13 +118,12 @@ function clearUnsavedToDoTasks() {
 function changeToDoUrgency(event) {
   var nearestToDoCard = event.target.closest('.task-card');
   var urgentBtn = event.target.closest('#urgent-btn-js');
-  if (urgentBtn.src == 'file:///Users/tarastarlov/check-yo-self/assets/urgent.svg') {
-    urgentBtn.src = 'file:///Users/tarastarlov/check-yo-self/assets/urgent-active.svg';
-    nearestToDoCard.classList.add('todo-card-urgent');
+  if (urgentBtn.classList.contains('not-urgent')) {
+    urgentBtn.src = 'assets/urgent-active.svg';
+    urgentBtn.classList.remove('not-urgent');
   } else {
-    urgentBtn.src == 'file:///Users/tarastarlov/check-yo-self/assets/urgent-active.svg'
-    urgentBtn.src = 'file:///Users/tarastarlov/check-yo-self/assets/urgent.svg';
-    nearestToDoCard.classList.remove('todo-card-urgent');
+    urgentBtn.src = 'assets/urgent.svg';
+    urgentBtn.classList.add('not-urgent');
   }
 }
 
