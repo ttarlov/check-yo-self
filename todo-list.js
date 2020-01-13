@@ -1,6 +1,6 @@
 class ToDoList {
   constructor() {
-    this.id =
+    this.id = generateId();
     this.title =
     this.urgent = false;
     this.tasks = [];
