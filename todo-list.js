@@ -22,8 +22,8 @@ class ToDoList {
     window.localStorage.setItem('toDoArr', JSON.stringify(array));
   }
 
-  deleteFromStorage() {
-
+  deleteFromStorage(array) {
+    window.localStorage.setItem('toDoArr', JSON.stringify(array));
   }
 
   updateToDo() {
