@@ -17,4 +17,21 @@ class ToDoList {
     tasksArr.splice(indexToRemove, 1);
     console.log(this.tasks);
   }
+
+  saveToStorage(array) {
+    window.localStorage.setItem('toDoArr', JSON.stringify(array));
+  }
+
+  deleteFromStorage() {
+
+  }
+
+  updateToDo() {
+
+  }
+
+  updateTask(toDosArray) {
+
+  }
+
 }
