@@ -13,7 +13,7 @@ var clearBtn = document.querySelector('.clear-btn-js');
 var toDosArray = [];
 
 window.onload = function () {
-  // debugger
+  displayNoToDosYetMsg();
   var savedTodoArry = window.localStorage.getItem('toDoArr');
   if (localStorage.length > 0) {
     toDosArray = toDosArray.concat(JSON.parse(savedTodoArry));
@@ -81,11 +81,11 @@ function deleteUnsavedTask(event) {
 }
 
 function incertTaskCard() {
-  noNewTaskYet.remove();
+  noNewTaskYet.classList.add('hidden');
   makeTaskListBtn.disabled = true;
   makeTaskListBtn.classList.add('button-inactive');
   addTaskBtn.disabled = true;
-  taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card">
+  taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card" data-id="${potentialToDo.id}">
     <h2> ${taskTitleInput.value}</h2>
     <div class="saved-tasks-container">
     </div>
@@ -157,6 +157,8 @@ function updateTaskCardsArr(event) {
   console.log('matching IDS', toDosToRemove);
   console.log(event.target.dataset.id);
   console.log(toDosArray);
+  potentialToDo.deleteFromStorage(toDosArray);
+  displayNoToDosYetMsg();
 }
 
 function changeTaskToChecked(event) {
@@ -171,7 +173,6 @@ function changeTaskToChecked(event) {
 }
 
 function displaySavedCardsInDom() {
-  noNewTaskYet.remove();
   for (var i = 0; i < toDosArray.length; i++) {
     taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card">
     <h2>${toDosArray[i].title}</h2>
@@ -188,6 +189,7 @@ function displaySavedCardsInDom() {
       </div>
     </div>
   </div>`);
+
     var savedContainer = document.querySelector(`#saved-${potentialToDo.id}`);
     console.log(potentialToDo.id);
     loopOverTasks(toDosArray[i].tasks, savedContainer);
@@ -203,6 +205,15 @@ function loopOverTasks(tasks, container) {
         <span class="single-task">${tasks[j].content}</span>
       </div>
     </div>`);
+  }
+}
+
+function displayNoToDosYetMsg() {
+  console.log(localStorage.toDoArr.length)
+  if (localStorage.toDoArr.length < 3 ) {
+    noNewTaskYet.classList.remove('hidden');
+  } else {
+    noNewTaskYet.classList.add('hidden');
   }
 }
 
