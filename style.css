@@ -251,3 +251,13 @@ h2 {
   flex-direction: column;
   align-items: center;
 }
+
+.button-inactive {
+  color: grey;
+  cursor: not-allowed;
+}
+
+.todo-card-urgent {
+  border-color: #ffc30c;
+  background-color: #ffe89d;
+}
