@@ -2,7 +2,7 @@ var globalButtonEventListener = document.querySelector('body');
 var taskTitleInput = document.querySelector('.title-input-js');
 var taskItemInput = document.querySelector('.task-input-js');
 var unsavedTasks = document.querySelector('.unsaved-tasks');
-var potentialToDo = new ToDoList();
+var potentialToDo = new ToDoList({});
 var taskContainer = document.querySelector('.task-card-container');
 var addTaskBtn = document.querySelector('.add-task-btn-js');
 var makeTaskListBtn = document.querySelector('.make-task-btn-js');
@@ -44,8 +44,10 @@ function globalButtonEventHandler(event) {
     event.target.closest('.task-card').remove();
   } else if (event.target.classList.contains('urgent-btn')) {
     changeToDoUrgency(event);
+    updateToDoObjUrgencyStat(event);
   } else if (event.target.classList.contains('checkbox-img'))
     changeTaskToChecked(event);
+
 }
 
 function displayUnsavedTasks() {
@@ -91,7 +93,7 @@ function incertTaskCard() {
     </div>
     <div class="urgency-delete-container">
       <div class="urgent-img-tag">
-        <img class="urgent-btn not-urgent" id="urgent-btn-js" src="assets/urgent.svg" alt="urgency level">
+        <img class="urgent-btn not-urgent" id="urgent-btn-js" data-id="${potentialToDo.id}" src="assets/urgent.svg" alt="urgency level">
         <p>urgent</p>
       </div>
       <div class="delete-img-tag">
@@ -128,16 +130,18 @@ function clearUnsavedToDoTasks() {
   unsavedTasks.innerHTML = '';
   taskItemInput.value = '';
   taskTitleInput.value = '';
-  potentialToDo = new ToDoList();
+  potentialToDo = new ToDoList({});
 }
 
 function changeToDoUrgency(event) {
+  debugger
   var nearestToDoCard = event.target.closest('.task-card');
   var urgentBtn = event.target.closest('#urgent-btn-js');
   if (urgentBtn.classList.contains('not-urgent')) {
     urgentBtn.src = 'assets/urgent-active.svg';
     urgentBtn.classList.remove('not-urgent');
     nearestToDoCard.classList.add('todo-card-urgent');
+
   } else {
     urgentBtn.src = 'assets/urgent.svg';
     urgentBtn.classList.add('not-urgent');
@@ -176,22 +180,22 @@ function displaySavedCardsInDom() {
   for (var i = 0; i < toDosArray.length; i++) {
     taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card">
     <h2>${toDosArray[i].title}</h2>
-    <div class="saved-tasks-container" id="saved-${potentialToDo.id}">
+    <div class="saved-tasks-container" id="saved-${toDosArray[i].id}">
     </div>
     <div class="urgency-delete-container">
       <div class="urgent-img-tag">
-        <img class="urgent-btn not-urgent" id="urgent-btn-js" src="assets/urgent.svg" alt="urgency level">
+        <img class="urgent-btn not-urgent" id="urgent-btn-js"  data-id="${toDosArray[i].id}" src="assets/urgent.svg" alt="urgency level">
         <p>urgent</p>
       </div>
       <div class="delete-img-tag">
-        <img class="delete-task-card" src="assets/delete.svg" data-id="${potentialToDo.id}" alt="delete card button">
+        <img class="delete-task-card" src="assets/delete.svg" data-id="${toDosArray[i].id}" alt="delete card button">
         <p>delete</p>
       </div>
     </div>
   </div>`);
-
-    var savedContainer = document.querySelector(`#saved-${potentialToDo.id}`);
-    console.log(potentialToDo.id);
+    updateDomUrgencyStatus(toDosArray[i]);
+    var savedContainer = document.querySelector(`#saved-${toDosArray[i].id}`);
+    console.log(toDosArray[i].id);
     loopOverTasks(toDosArray[i].tasks, savedContainer);
   }
 }
@@ -217,4 +221,41 @@ function displayNoToDosYetMsg() {
   }
 }
 
-///end
+
+
+function fetchList() {
+  var listId = event.target.dataset.id;
+  console.log(listId);
+  var matchedTodo = toDosArray.find(toDoObj => toDoObj.id == listId);
+  console.log(matchedTodo);
+  var toDoReinstantiated = new ToDoList(matchedTodo)
+    return toDoReinstantiated;
+}
+
+function updateToDoObjUrgencyStat(event) {
+  var toDoReinstantiated = fetchList();
+  toDoReinstantiated.changeUrgency();
+  console.log(toDoReinstantiated);
+  updateToDoCardInArr(toDoReinstantiated);
+}
+
+function updateToDoCardInArr(toDoToUpdate) {
+  let cardToUpdate = toDosArray.find(toDoObj => toDoObj.id == toDoToUpdate.id);
+  let indexToUpdate = toDosArray.indexOf(cardToUpdate)
+  toDosArray.splice(indexToUpdate, 1, toDoToUpdate);
+  toDoToUpdate.saveToStorage(toDosArray);
+  console.log(toDosArray);
+}
+
+function updateDomUrgencyStatus(arr) {
+  // debugger
+  // var nearestToDoCard = querySelector('.task-card');
+  let urgentBtn = document.querySelector('#urgent-btn-js');
+  if (arr.urgent == true) {
+    urgentBtn.src = 'assets/urgent-active.svg';
+    urgentBtn.closest('.task-card').classList.add('todo-card-urgent');
+  } else {
+    urgentBtn.src = 'assets/urgent.svg';
+    urgentBtn.closest('.task-card').classList.remove('todo-card-urgent');
+  }
+}
