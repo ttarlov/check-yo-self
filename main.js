@@ -25,12 +25,13 @@ window.onload = function () {
 };
 
 globalButtonEventListener.addEventListener('click', globalButtonEventHandler);
-taskItemInput.addEventListener('keyup', checkTaskItemInput);
-taskTitleInput.addEventListener('keyup', checkTaskItemInput);
+taskTitleInput.addEventListener('input', checkTaskItemInput);
+taskItemInput.addEventListener('input', checkTaskItemInput);
 
 function globalButtonEventHandler(event) {
   if (event.target.classList.contains('add-task-btn-js')) {
     displayUnsavedTasks();
+    checkTaskItemInput();
   } else if (event.target.classList.contains('clear-btn-js')) {
     clearUnsavedToDoTasks();
   } else if (event.target.classList.contains('filter-btn-js')) {
@@ -68,8 +69,10 @@ function generateId() {
 }
 
 function checkTaskItemInput() {
-  if (potentialToDo.tasks.length > 0 && taskTitleInput.value.length > 0) {
+  if (taskTitleInput.value.length > 0 && potentialToDo.tasks.length > 0) {
+    console.log('length of tasks array', potentialToDo.tasks.length);
     makeTaskListBtn.disabled = false;
+    // addTaskBtn.disabled = false;
     makeTaskListBtn.classList.remove('button-inactive');
   } else if (taskItemInput.value.length > 0) {
     addTaskBtn.disabled = false;
@@ -154,12 +157,12 @@ function putArrInLocalStorage(array) {
 }
 
 function updateTaskCardsArr(event) {
-  var toDosToRemove = toDosArray.find(todo => todo.id == event.target.dataset.id);
+  var toDosToRemove = toDosArray.find(function(todo) {
+    return todo.id == event.target.dataset.id
+  });
+  console.log(toDosToRemove);
   var indexToRemove = toDosArray.indexOf(toDosToRemove);
   toDosArray.splice(indexToRemove, 1);
-  console.log('matching IDS', toDosToRemove);
-  console.log(event.target.dataset.id);
-  console.log(toDosArray);
   potentialToDo.deleteFromStorage(toDosArray);
   displayNoToDosYetMsg();
 }
