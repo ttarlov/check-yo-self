@@ -1,7 +1,7 @@
 class Task {
-  constructor(content) {
-    this.id = generateId();
-    this.content = content;
-    this.completed = false;
+  constructor(task) {
+    this.id = task.id || generateId();
+    this.content = task.content;
+    this.completed = task.completed || false;
   }
 }
