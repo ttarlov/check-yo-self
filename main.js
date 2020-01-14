@@ -134,7 +134,6 @@ function clearUnsavedToDoTasks() {
 }
 
 function changeToDoUrgency(event) {
-  debugger
   var nearestToDoCard = event.target.closest('.task-card');
   var urgentBtn = event.target.closest('#urgent-btn-js');
   if (urgentBtn.classList.contains('not-urgent')) {
