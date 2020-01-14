@@ -1,9 +1,9 @@
 class ToDoList {
-  constructor() {
-    this.id = generateId();
-    this.title =
-    this.urgent = false;
-    this.tasks = [];
+  constructor(todo) {
+    this.id = todo.id || generateId();
+    this.title = todo.title;
+    this.urgent = todo.urgent || false;
+    this.tasks = todo.tasks || [];
   }
 
   addTask(task) {
@@ -32,6 +32,10 @@ class ToDoList {
 
   updateTask(toDosArray) {
 
+  }
+
+  changeUrgency() {
+    this.urgent = !this.urgent;
   }
 
 }
