@@ -35,7 +35,7 @@ function globalButtonEventHandler(event) {
   } else if (event.target.classList.contains('clear-btn-js')) {
     clearUnsavedToDoTasks();
   } else if (event.target.classList.contains('filter-btn-js')) {
-    console.log('filter button pressed');
+    // console.log('filter button pressed');
   } else if (event.target.classList.contains('make-task-btn-js')) {
     incertTaskCard();
   } else if (event.target.classList.contains('delete-img')) {
@@ -46,10 +46,12 @@ function globalButtonEventHandler(event) {
   } else if (event.target.classList.contains('urgent-btn')) {
     changeToDoUrgency(event);
     updateToDoObjUrgencyStat(event);
-  } else if (event.target.classList.contains('checkbox-img'))
+  } else if (event.target.classList.contains('checkbox-img')) {
     changeTaskToChecked(event);
     identifyObjectToUpdate(event);
+  }
 }
+
 
 function displayUnsavedTasks() {
   clearBtn.classList.remove('button-inactive');
@@ -70,7 +72,7 @@ function generateId() {
 
 function checkTaskItemInput() {
   if (taskTitleInput.value.length > 0 && potentialToDo.tasks.length > 0) {
-    console.log('length of tasks array', potentialToDo.tasks.length);
+    // console.log('length of tasks array', potentialToDo.tasks.length);
     clearBtn.classList.remove('button-inactive');
     clearBtn.disabled = false;
     makeTaskListBtn.disabled = false;
@@ -111,7 +113,7 @@ function incertTaskCard() {
   potentialToDo.title = taskTitleInput.value;
   taskTitleInput.value = '';
   let taskOnToDoCard = document.querySelector('.saved-tasks-container');
-  console.log('look inside POTENTIAL TO DO', potentialToDo.id);
+  // console.log('look inside POTENTIAL TO DO', potentialToDo.id);
   toDosArray.push(potentialToDo);
   extractTask(taskOnToDoCard);
   clearUnsavedToDoTasks();
@@ -200,18 +202,26 @@ function displaySavedCardsInDom() {
     </div>
   </div>`);
     updateDomUrgencyStatus(toDosArray[i]);
+    updateDomTasksStatus(toDosArray[i]);
     var savedContainer = document.querySelector(`#saved-${toDosArray[i].id}`);
-    console.log(toDosArray[i].id);
+    // console.log(toDosArray[i].id);
     loopOverTasks(toDosArray[i].tasks, savedContainer);
   }
 }
 
 function loopOverTasks(tasks, container) {
   for (var j = 0; j < tasks.length; j++) {
+    var emptyCheckBox = 'Assets/checkbox.svg';
+    console.log(tasks[j].completed);
+    if (tasks[j].completed == true) {
+      emptyCheckBox = 'Assets/checkbox-active.svg';
+    } else {
+      emptyCheckBox = 'Assets/checkbox.svg';
+    }
     container.insertAdjacentHTML('beforeend', `<div class="saved-tasks">
       <div class="saved-task-img">
         <img class="checkbox-img not-checked"  data-id="${tasks[j].id}"
-        src="assets/checkbox.svg" alt="checkbox"></img>
+        src="${emptyCheckBox}" alt="checkbox"></img>
         <span class="single-task">${tasks[j].content}</span>
       </div>
     </div>`);
@@ -229,7 +239,7 @@ function displayNoToDosYetMsg() {
 
 function fetchList() {
   var listId = event.target.dataset.id;
-  console.log(listId);
+  // console.log(listId);
   var matchedTodo = toDosArray.find(toDoObj => toDoObj.id == listId);
   console.log(matchedTodo);
   var toDoReinstantiated = new ToDoList(matchedTodo)
@@ -239,7 +249,7 @@ function fetchList() {
 function updateToDoObjUrgencyStat(event) {
   var toDoReinstantiated = fetchList();
   toDoReinstantiated.changeUrgency();
-  console.log(toDoReinstantiated);
+  // console.log(toDoReinstantiated);
   updateToDoCardInArr(toDoReinstantiated);
 }
 
@@ -248,7 +258,7 @@ function updateToDoCardInArr(toDoToUpdate) {
   let indexToUpdate = toDosArray.indexOf(cardToUpdate)
   toDosArray.splice(indexToUpdate, 1, toDoToUpdate);
   toDoToUpdate.saveToStorage(toDosArray);
-  console.log(toDosArray);
+  // console.log('TODOSARRAY AFTER SAVE', toDosArray);
 }
 
 function updateDomUrgencyStatus(arr) {
@@ -262,28 +272,26 @@ function updateDomUrgencyStatus(arr) {
   }
 }
 
-
-
 function identifyObjectToUpdate(event) {
-  // fetchToDoObj();
   var toDoCardId = event.target.closest('.task-card').dataset.id;
+  // console.log(toDoCardId);
   var matchedToDoObj = toDosArray.find(function (todo) {
     return todo.id == toDoCardId;
   });
 
-  console.log(matchedToDoObj);
+  // console.log(matchedToDoObj);
   // return matchedToDoObj;
   identifyTaskToUpdate(matchedToDoObj);
 }
 
 function identifyTaskToUpdate(toDo) {
   var checkMarkImgId = event.target.dataset.id;
-  console.log('checkbox image', checkMarkImgId);
+  // console.log('checkbox image', checkMarkImgId);
   var arrayOfTasks = toDo.tasks;
   var matchedTask = arrayOfTasks.find(function(task) {
     return task.id == checkMarkImgId;
   })
-  console.log('matchedTask', matchedTask);
+  // console.log('matchedTask', matchedTask);
   updateTaskObjCheckStatus(matchedTask);
 }
 
@@ -291,9 +299,24 @@ function updateTaskObjCheckStatus(theTask) {
   // debugger
   let toDoCardId = event.target.closest('.task-card').dataset.id;
   theTask.completed = !theTask.completed;
-  console.log(theTask);
-  console.log(toDosArray);
+  // console.log('updated task', theTask);
+  // console.log(toDosArray);
   let matchedTodo = toDosArray.find(toDoObj => toDoObj.id == toDoCardId);
   let toDoReinstantiated = new ToDoList(matchedTodo);
-  console.log(toDoReinstantiated);
+  // let taskReinstantiated = new Task(theTask);
+  // console.log('New ToDo', toDoReinstantiated);
+  // console.log('New Task', taskReinstantiated);
+  updateToDoCardInArr(toDoReinstantiated);
 }
+
+function updateDomTasksStatus(arr) {
+// debugger
+  // console.log(arr);
+// let checkedTasks =
+
+  // getTasksArrayFromLS()
+}
+
+// function getTasksArrayFromLS() {
+//
+// }
