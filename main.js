@@ -290,9 +290,11 @@ function updateTaskObjCheckStatus(theTask) {
 }
 
 function filterByUrgency() {
-  let allNonUrgentCards = [...taskContainer.querySelectorAll('.todo-card-urgent')];
-  for (var i = 0; i < allNonUrgentCards.length; i++) {
-    allNonUrgentCards[i].classList.toggle('hidden');
-  }
+  let allNonUrgentCards = [...taskContainer.querySelectorAll('.task-card')];
+  allNonUrgentCards.forEach(function (card) {
+    if (!card.classList.contains("todo-card-urgent")) {
+      card.classList.toggle('hidden');
+    }
+  });
 
 }
