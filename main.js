@@ -35,6 +35,7 @@ function globalButtonEventHandler(event) {
   } else if (event.target.classList.contains('clear-btn-js')) {
     clearUnsavedToDoTasks();
   } else if (event.target.classList.contains('filter-btn-js')) {
+    filterByUrgency();
   } else if (event.target.classList.contains('make-task-btn-js')) {
     incertTaskCard();
   } else if (event.target.classList.contains('delete-img')) {
@@ -273,9 +274,10 @@ function identifyObjectToUpdate(event) {
 function identifyTaskToUpdate(toDo) {
   var checkMarkImgId = event.target.dataset.id;
   var arrayOfTasks = toDo.tasks;
-  var matchedTask = arrayOfTasks.find(function(task) {
+  var matchedTask = arrayOfTasks.find(function (task) {
     return task.id == checkMarkImgId;
   });
+
   updateTaskObjCheckStatus(matchedTask);
 }
 
@@ -285,4 +287,12 @@ function updateTaskObjCheckStatus(theTask) {
   let matchedTodo = toDosArray.find(toDoObj => toDoObj.id == toDoCardId);
   let toDoReinstantiated = new ToDoList(matchedTodo);
   updateToDoCardInArr(toDoReinstantiated);
+}
+
+function filterByUrgency() {
+  let allNonUrgentCards = [...taskContainer.querySelectorAll('.todo-card-urgent')];
+  for (var i = 0; i < allNonUrgentCards.length; i++) {
+    allNonUrgentCards[i].classList.toggle('hidden');
+  }
+
 }
