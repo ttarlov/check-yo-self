@@ -35,7 +35,6 @@ function globalButtonEventHandler(event) {
   } else if (event.target.classList.contains('clear-btn-js')) {
     clearUnsavedToDoTasks();
   } else if (event.target.classList.contains('filter-btn-js')) {
-    console.log('filter button pressed');
   } else if (event.target.classList.contains('make-task-btn-js')) {
     incertTaskCard();
   } else if (event.target.classList.contains('delete-img')) {
@@ -46,14 +45,16 @@ function globalButtonEventHandler(event) {
   } else if (event.target.classList.contains('urgent-btn')) {
     changeToDoUrgency(event);
     updateToDoObjUrgencyStat(event);
-  } else if (event.target.classList.contains('checkbox-img'))
+  } else if (event.target.classList.contains('checkbox-img')) {
     changeTaskToChecked(event);
-
+    identifyObjectToUpdate(event);
+  }
 }
+
 
 function displayUnsavedTasks() {
   clearBtn.classList.remove('button-inactive');
-  addTaskBtn.disabled = true;
+  addTaskBtn.disabled = false;
   var task = new Task(taskItemInput.value);
   unsavedTasks.insertAdjacentHTML('beforeend',
   `<div class="saved-task-img">
@@ -70,12 +71,14 @@ function generateId() {
 
 function checkTaskItemInput() {
   if (taskTitleInput.value.length > 0 && potentialToDo.tasks.length > 0) {
-    console.log('length of tasks array', potentialToDo.tasks.length);
+    clearBtn.classList.remove('button-inactive');
+    clearBtn.disabled = false;
     makeTaskListBtn.disabled = false;
-    // addTaskBtn.disabled = false;
     makeTaskListBtn.classList.remove('button-inactive');
   } else if (taskItemInput.value.length > 0) {
     addTaskBtn.disabled = false;
+    clearBtn.classList.remove('button-inactive');
+    clearBtn.disabled = false;
   }
 }
 
@@ -108,7 +111,6 @@ function incertTaskCard() {
   potentialToDo.title = taskTitleInput.value;
   taskTitleInput.value = '';
   let taskOnToDoCard = document.querySelector('.saved-tasks-container');
-  console.log('look inside POTENTIAL TO DO', potentialToDo.id);
   toDosArray.push(potentialToDo);
   extractTask(taskOnToDoCard);
   clearUnsavedToDoTasks();
@@ -120,7 +122,7 @@ function extractTask(taskOnToDoCard) {
   for (var i = 0; i < taskObj.length; i++) {
     taskOnToDoCard.insertAdjacentHTML('beforeend', `<div class="saved-tasks">
         <div class="saved-task-img">
-          <img class="checkbox-img not-checked" id="check-box" data-id="${taskObj[i].id}"
+          <img class="checkbox-img not-checked"  data-id="${taskObj[i].id}"
           src="assets/checkbox.svg" alt="checkbox"></img>
           <span class="single-task">${taskObj[i].content}</span>
         </div>
@@ -130,6 +132,8 @@ function extractTask(taskOnToDoCard) {
 
 function clearUnsavedToDoTasks() {
   clearBtn.classList.add('button-inactive');
+  clearBtn.disabled = true;
+  makeTaskListBtn.disabled = true;
   unsavedTasks.innerHTML = '';
   taskItemInput.value = '';
   taskTitleInput.value = '';
@@ -152,15 +156,14 @@ function changeToDoUrgency(event) {
 }
 
 function putArrInLocalStorage(array) {
-  potentialToDo.saveToStorage(array)
-  // window.localStorage.setItem('toDoArr', JSON.stringify(array));
+  potentialToDo.saveToStorage(array);
 }
 
 function updateTaskCardsArr(event) {
   var toDosToRemove = toDosArray.find(function(todo) {
-    return todo.id == event.target.dataset.id
+    return todo.id == event.target.dataset.id;
   });
-  console.log(toDosToRemove);
+
   var indexToRemove = toDosArray.indexOf(toDosToRemove);
   toDosArray.splice(indexToRemove, 1);
   potentialToDo.deleteFromStorage(toDosArray);
@@ -168,19 +171,19 @@ function updateTaskCardsArr(event) {
 }
 
 function changeTaskToChecked(event) {
-  let checkBox = event.target.closest('#check-box')
+  let checkBox = event.target.closest('.checkbox-img');
   if (checkBox.classList.contains('not-checked')) {
-    checkBox.src = 'assets/checkbox-active.svg'
+    checkBox.src = 'assets/checkbox-active.svg';
     checkBox.classList.remove('not-checked');
   } else {
-    checkBox.src = 'assets/checkbox.svg'
+    checkBox.src = 'assets/checkbox.svg';
     checkBox.classList.add('not-checked');
   }
 }
 
 function displaySavedCardsInDom() {
   for (var i = 0; i < toDosArray.length; i++) {
-    taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card">
+    taskContainer.insertAdjacentHTML('afterbegin', `<div class="task-card" data-id='${toDosArray[i].id}'>
     <h2>${toDosArray[i].title}</h2>
     <div class="saved-tasks-container" id="saved-${toDosArray[i].id}">
     </div>
@@ -197,17 +200,22 @@ function displaySavedCardsInDom() {
   </div>`);
     updateDomUrgencyStatus(toDosArray[i]);
     var savedContainer = document.querySelector(`#saved-${toDosArray[i].id}`);
-    console.log(toDosArray[i].id);
     loopOverTasks(toDosArray[i].tasks, savedContainer);
   }
 }
 
 function loopOverTasks(tasks, container) {
   for (var j = 0; j < tasks.length; j++) {
+    var emptyCheckBox = 'Assets/checkbox.svg';
+    if (tasks[j].completed == true) {
+      emptyCheckBox = 'Assets/checkbox-active.svg';
+    } else {
+      emptyCheckBox = 'Assets/checkbox.svg';
+    }
     container.insertAdjacentHTML('beforeend', `<div class="saved-tasks">
       <div class="saved-task-img">
-        <img class="checkbox-img not-checked" id="check-box" data-id="${tasks[j].id}"
-        src="assets/checkbox.svg" alt="checkbox"></img>
+        <img class="checkbox-img not-checked"  data-id="${tasks[j].id}"
+        src="${emptyCheckBox}" alt="checkbox"></img>
         <span class="single-task">${tasks[j].content}</span>
       </div>
     </div>`);
@@ -215,7 +223,6 @@ function loopOverTasks(tasks, container) {
 }
 
 function displayNoToDosYetMsg() {
-  console.log(localStorage.toDoArr.length)
   if (localStorage.toDoArr.length < 3 ) {
     noNewTaskYet.classList.remove('hidden');
   } else {
@@ -223,21 +230,16 @@ function displayNoToDosYetMsg() {
   }
 }
 
-
-
 function fetchList() {
   var listId = event.target.dataset.id;
-  console.log(listId);
   var matchedTodo = toDosArray.find(toDoObj => toDoObj.id == listId);
-  console.log(matchedTodo);
   var toDoReinstantiated = new ToDoList(matchedTodo)
-    return toDoReinstantiated;
+  return toDoReinstantiated;
 }
 
 function updateToDoObjUrgencyStat(event) {
   var toDoReinstantiated = fetchList();
   toDoReinstantiated.changeUrgency();
-  console.log(toDoReinstantiated);
   updateToDoCardInArr(toDoReinstantiated);
 }
 
@@ -246,12 +248,9 @@ function updateToDoCardInArr(toDoToUpdate) {
   let indexToUpdate = toDosArray.indexOf(cardToUpdate)
   toDosArray.splice(indexToUpdate, 1, toDoToUpdate);
   toDoToUpdate.saveToStorage(toDosArray);
-  console.log(toDosArray);
 }
 
 function updateDomUrgencyStatus(arr) {
-  // debugger
-  // var nearestToDoCard = querySelector('.task-card');
   let urgentBtn = document.querySelector('#urgent-btn-js');
   if (arr.urgent == true) {
     urgentBtn.src = 'assets/urgent-active.svg';
@@ -260,4 +259,30 @@ function updateDomUrgencyStatus(arr) {
     urgentBtn.src = 'assets/urgent.svg';
     urgentBtn.closest('.task-card').classList.remove('todo-card-urgent');
   }
+}
+
+function identifyObjectToUpdate(event) {
+  var toDoCardId = event.target.closest('.task-card').dataset.id;
+  var matchedToDoObj = toDosArray.find(function (todo) {
+    return todo.id == toDoCardId;
+  });
+
+  identifyTaskToUpdate(matchedToDoObj);
+}
+
+function identifyTaskToUpdate(toDo) {
+  var checkMarkImgId = event.target.dataset.id;
+  var arrayOfTasks = toDo.tasks;
+  var matchedTask = arrayOfTasks.find(function(task) {
+    return task.id == checkMarkImgId;
+  });
+  updateTaskObjCheckStatus(matchedTask);
+}
+
+function updateTaskObjCheckStatus(theTask) {
+  let toDoCardId = event.target.closest('.task-card').dataset.id;
+  theTask.completed = !theTask.completed;
+  let matchedTodo = toDosArray.find(toDoObj => toDoObj.id == toDoCardId);
+  let toDoReinstantiated = new ToDoList(matchedTodo);
+  updateToDoCardInArr(toDoReinstantiated);
 }
