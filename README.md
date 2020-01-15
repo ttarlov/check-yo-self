@@ -1,6 +1,6 @@
 # Check Yo' Self
 
-Do you miss appointment? Do you forget to get potatoes or
+Do you miss appointments all the time? Do you forget to get potatoes or
 eggs when you go grocery shopping?
 Say hello to Check Yo’Self.
 The most advanced (when it works) ToDo list web app to ever hit the interwebs.
