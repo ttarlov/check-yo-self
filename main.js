@@ -52,14 +52,13 @@ function globalButtonEventHandler(event) {
   }
 }
 
-
 function displayUnsavedTasks() {
   clearBtn.classList.remove('button-inactive');
   addTaskBtn.disabled = false;
   var task = new Task(taskItemInput.value);
   unsavedTasks.insertAdjacentHTML('beforeend',
   `<div class="saved-task-img">
-    <img class="delete-img" data-id="${task.id}" src="assets/delete.svg" alt="checkbox"></img>
+    <img class="delete-img" data-id="${task.id}" src="Assets/delete.svg" alt="checkbox"></img>
     <span class="single-task">${task.content}</span>
   </div>`);
   potentialToDo.addTask(task);
@@ -100,11 +99,11 @@ function incertTaskCard() {
     </div>
     <div class="urgency-delete-container">
       <div class="urgent-img-tag">
-        <img class="urgent-btn not-urgent" id="urgent-btn-js" data-id="${potentialToDo.id}" src="assets/urgent.svg" alt="urgency level">
+        <img class="urgent-btn not-urgent" id="urgent-btn-js" data-id="${potentialToDo.id}" src="Assets/urgent.svg" alt="urgency level">
         <p>urgent</p>
       </div>
       <div class="delete-img-tag">
-        <img class="delete-task-card" src="assets/delete.svg" data-id="${potentialToDo.id}" alt="delete card button">
+        <img class="delete-task-card" src="Assets/delete.svg" data-id="${potentialToDo.id}" alt="delete card button">
         <p>delete</p>
       </div>
     </div>
@@ -145,12 +144,12 @@ function changeToDoUrgency(event) {
   var nearestToDoCard = event.target.closest('.task-card');
   var urgentBtn = event.target.closest('#urgent-btn-js');
   if (urgentBtn.classList.contains('not-urgent')) {
-    urgentBtn.src = 'assets/urgent-active.svg';
+    urgentBtn.src = 'Assets/urgent-active.svg';
     urgentBtn.classList.remove('not-urgent');
     nearestToDoCard.classList.add('todo-card-urgent');
 
   } else {
-    urgentBtn.src = 'assets/urgent.svg';
+    urgentBtn.src = 'Assets/urgent.svg';
     urgentBtn.classList.add('not-urgent');
     nearestToDoCard.classList.remove('todo-card-urgent');
   }
@@ -174,10 +173,10 @@ function updateTaskCardsArr(event) {
 function changeTaskToChecked(event) {
   let checkBox = event.target.closest('.checkbox-img');
   if (checkBox.classList.contains('not-checked')) {
-    checkBox.src = 'assets/checkbox-active.svg';
+    checkBox.src = 'Assets/checkbox-active.svg';
     checkBox.classList.remove('not-checked');
   } else {
-    checkBox.src = 'assets/checkbox.svg';
+    checkBox.src = 'Assets/checkbox.svg';
     checkBox.classList.add('not-checked');
   }
 }
@@ -190,11 +189,11 @@ function displaySavedCardsInDom() {
     </div>
     <div class="urgency-delete-container">
       <div class="urgent-img-tag">
-        <img class="urgent-btn not-urgent" id="urgent-btn-js"  data-id="${toDosArray[i].id}" src="assets/urgent.svg" alt="urgency level">
+        <img class="urgent-btn not-urgent" id="urgent-btn-js"  data-id="${toDosArray[i].id}" src="Assets/urgent.svg" alt="urgency level">
         <p>urgent</p>
       </div>
       <div class="delete-img-tag">
-        <img class="delete-task-card" src="assets/delete.svg" data-id="${toDosArray[i].id}" alt="delete card button">
+        <img class="delete-task-card" src="Assets/delete.svg" data-id="${toDosArray[i].id}" alt="delete card button">
         <p>delete</p>
       </div>
     </div>
@@ -254,10 +253,10 @@ function updateToDoCardInArr(toDoToUpdate) {
 function updateDomUrgencyStatus(arr) {
   let urgentBtn = document.querySelector('#urgent-btn-js');
   if (arr.urgent == true) {
-    urgentBtn.src = 'assets/urgent-active.svg';
+    urgentBtn.src = 'Assets/urgent-active.svg';
     urgentBtn.closest('.task-card').classList.add('todo-card-urgent');
   } else {
-    urgentBtn.src = 'assets/urgent.svg';
+    urgentBtn.src = 'Assets/urgent.svg';
     urgentBtn.closest('.task-card').classList.remove('todo-card-urgent');
   }
 }
