@@ -3,7 +3,7 @@
 Do you miss appointments all the time? Do you forget to get potatoes or
 eggs when you go grocery shopping?
 Say hello to Check Yo’Self.
-The most advanced (when it works) ToDo list web app to ever hit the interwebs.
+The most advanced (when it works) ToDo list web app to ever hit the interwebz.
 
 But in all seriousness Check Yo’Self is the final independent/solo project for the Front End Mod 1 at Turing School of Software and Design.  The main goal of this project was to build a web application that uses nested objects, nested arrays and complex methods and keeps Data Model separate from Document Object Model.
 
